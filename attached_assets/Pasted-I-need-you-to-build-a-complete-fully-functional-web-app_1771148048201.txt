@@ -1,0 +1,57 @@
+I need you to build a complete, fully functional web application called "CrewHub" based on the detailed specifications below.
+
+**Project Overview**
+* **Name:** CrewHub
+* **Slogan:** Connecting Homes With Their Local Heroes
+* **Type:** Service Marketplace connecting users with local workers (electricians, plumbers, etc.).
+* **Tech Stack:** Python (Flask), MongoDB (using PyMongo), HTML/CSS/Vanilla JS.
+
+**Folder Structure**
+Please strictly follow this structure:
+- app.py (Main application controller)
+- config.py (Configuration)
+- models.py (Database logic/Classes)
+- requirements.txt
+- static/css/style.css
+- static/js/main.js
+- templates/ (base.html, index.html, login.html, register.html, register_user.html, register_worker.html, dashboard.html, workers.html, worker_profile.html, admin.html)
+
+**Database Collections (MongoDB)**
+1.  **users:** {_id, full_name, email, password(hashed), mobile, address, pincode, role='user', created_at}
+2.  **workers:** {_id, full_name, email, password(hashed), mobile, address, pincode, worker_type, visiting_charge, availability_status (Boolean), rating_avg, role='worker'}
+3.  **appointments:** {_id, user_id, worker_id, issue_description, address, status (pending/accepted/rejected), visit_time, created_at}
+4.  **reports:** {_id, reporter_id, reported_worker_id, reason, created_at}
+
+**Core Features & Workflows**
+
+1.  **Authentication & Roles**
+    * **Login:** Unified login page for Users, Workers, and Admin.
+    * **Register:** Separate forms for "User" and "Worker".
+    * **Admin:** Hardcode a default admin check (e.g., email='admin@crewhub.com', pass='admin') in the login logic.
+
+2.  **User Dashboard (`/dashboard` for role='user')**
+    * **Search/Filter:** Users can view a list of workers filtered by City/Pincode, Worker Type, and Rating.
+    * **Book Appointment:** A button on a worker's card to "Book Now". Form includes: Issue Description and Address.
+    * **My Appointments:** View status of bookings. If "Accepted", show the "Visit Time" set by the worker.
+    * **Feedback:** Ability to rate (1-5 stars) a worker after a job.
+    * **Report:** Ability to report a worker with a text reason.
+
+3.  **Worker Dashboard (`/dashboard` for role='worker')**
+    * **Availability Toggle:** Switch between "Available" and "Unavailable".
+    * **Job Requests:** List of incoming appointments with User Name, Issue, and Address.
+    * **Actions:**
+        * *Accept:* Opens a modal/input to set the "Visit Time". Updates status to "Accepted".
+        * *Reject:* Updates status to "Rejected".
+
+4.  **Admin Dashboard (`/admin`)**
+    * View total counts of users and workers.
+    * **Moderation:** List of reported workers. Button to "Ban/Delete" a worker.
+
+**Technical Requirements**
+* Use `flask_pymongo` for database connections.
+* Use `werkzeug.security` for password hashing.
+* Use `python-dotenv` for loading the MONGO_URI.
+* Ensure the UI is responsive and clean (you may use a CDN for Bootstrap or Tailwind if it helps, otherwise write clean custom CSS).
+* Add a logic to calculate the average rating for workers based on reviews.
+
+Please generate all necessary files and code to make this run immediately.
